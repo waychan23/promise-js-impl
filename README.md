@@ -6,5 +6,7 @@ Promise API JavaScript 实现（实验）
 
 Promise API的接口定义我参考的是[Mozilla Developer Network]。
 
+* 目前实现了第一种方式，对异步结果采取轮询的方式检查其状态。
+
 [V8]: https://github.com/v8/v8
 [Mozilla Developer Network]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise
