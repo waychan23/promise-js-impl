@@ -1,0 +1,32 @@
+{
+  "name": "promise-js-impl",
+  "version": "1.0.0",
+  "description": "Promise API Implementation in JavaScript (Experimental).",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "del": "^2.2.2",
+    "exorcist": "^0.4.0",
+    "gulp": "^3.9.1",
+    "gulp-minify": "0.0.15",
+    "gulp-sourcemaps": "^2.4.1",
+    "gulp-uglify": "^2.1.2",
+    "gulp-util": "^3.0.8",
+    "mocha": "^3.2.0",
+    "vinyl-buffer": "^1.0.0",
+    "vinyl-source-stream": "^1.1.0",
+    "watchify": "^3.9.0"
+  },
+  "scripts": {
+    "test": "./node_modules/mocha/bin/mocha test/**/*.js"
+  },
+  "keywords": [
+    "JavaScript",
+    "Pormise"
+  ],
+  "author": "Way Chan",
+  "license": "MIT"
+}
