@@ -98,7 +98,7 @@ function test(impl){
 		});
 	    });
 
-	    it('[async]catch first should invoke the catch()\'s onRejected callback', function(done){
+	    it('[async]should invoke the catch()\'s onRejected callback', function(done){
 		this.timeout(3500);
 		let promise = new JSPromise((resolve, reject) => {
 		    setTimeout(() => {
@@ -111,7 +111,7 @@ function test(impl){
 		});
 	    });
 
-	    it('[async]catch first should invoke the catch()\'s onRejected callback and the following then()\'s onFulfilled callback', function(done){
+	    it('[async]should invoke the catch()\'s onRejected callback and the following then()\'s onFulfilled callback', function(done){
 		this.timeout(3500);
 		let promise = new JSPromise((resolve, reject) => {
 		    setTimeout(() => {
@@ -127,7 +127,7 @@ function test(impl){
 		});
 	    });
 
-	    it('[async]catch first should invoke the catch()\'s onRejected callback and the following then()\'s onFulfilled callback', function(done){
+	    it('[async]should invoke the catch()\'s onRejected callback and the following then()\'s onFulfilled callback', function(done){
 		this.timeout(3500);
 		let promise = new JSPromise((resolve, reject) => {
 		    setTimeout(() => {
@@ -143,7 +143,7 @@ function test(impl){
 		});
 	    });
 
-	    it('[async]catch first should invoke the catch()\'s onRejected callback and the following then()\'s onFulfilled callback', function(done){
+	    it('[async]should invoke the catch()\'s onRejected callback and the following then()\'s onFulfilled callback', function(done){
 		this.timeout(3500);
 		let promise = new JSPromise((resolve, reject) => {
 		    setTimeout(() => {
@@ -219,7 +219,7 @@ function test(impl){
 		});
 	    });
 
-	    it('[sync]catch first should invoke the catch()\'s onRejected callback', function(done){
+	    it('[sync]catch should invoke the catch()\'s onRejected callback', function(done){
 		let promise = new JSPromise((resolve, reject) => {
 		    reject('reject the promise');
 		});
