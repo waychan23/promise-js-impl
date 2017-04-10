@@ -31,7 +31,11 @@ function JSPromise(executor){
 	_this.promiseStatus = STATUS_REJECTED;
     }
 
-    executor.apply(this, [resolve, reject]);
+    try{
+	executor.apply(this, [resolve, reject]);
+    }catch(e){
+	reject(e);
+    }
 };
 
 JSPromise.resolve = function(value){
@@ -48,8 +52,8 @@ JSPromise.reject = function(reason){
 
 JSPromise.prototype.then = function(onFulfilled, onRejected){
     if(this.resolved ||
-	(!onFulfilled && !onRejected) ||
-	 (typeof onFulfilled != 'function' && typeof onRejected != 'function')){
+       (!onFulfilled && !onRejected) ||
+       (typeof onFulfilled != 'function' && typeof onRejected != 'function')){
 	return JSPromise.resolve(undefined);
     }
 
@@ -62,7 +66,12 @@ JSPromise.prototype.then = function(onFulfilled, onRejected){
 	if(!this.onFulfilled){
 	    return JSPromise.resolve();
 	}
-	let retVal = this.onFulfilled.apply(this, [this.promiseValue]);
+	let retVal;
+	try{
+	    retVal = this.onFulfilled.apply(this, [this.promiseValue]);
+	}catch(e){
+	    return JSPromise.reject(e);
+	}
 	if(retVal instanceof JSPromise){
 	    return retVal;
 	}else{
@@ -75,7 +84,12 @@ JSPromise.prototype.then = function(onFulfilled, onRejected){
 	if(!this.onRejected){
 	    return JSPromise.reject(this.rejectReason);
 	}
-	let retVal = this.onRejected.apply(this, [this.rejectReason]);
+	let retVal;
+	try{
+	    this.onRejected.apply(this, [this.rejectReason]);
+	}catch(e){
+	    return JSPromise.reject(e);
+	}
 	if(retVal instanceof JSPromise){
 	    return retVal;
 	}else{
@@ -91,7 +105,12 @@ JSPromise.prototype.then = function(onFulfilled, onRejected){
 		    resolve();
 		}else if(_this.promiseStatus === STATUS_FULFILLED && _this.onFulfilled){
 		    _this.resolved = true;
-		    let retVal = _this.onFulfilled.apply(_this, [_this.promiseValue]);
+		    let retVal;
+		    try{
+			retVal = _this.onFulfilled.apply(_this, [_this.promiseValue]);
+		    }catch(e){
+			reject(e);
+		    }
 		    if(retVal instanceof JSPromise){
 			retVal.then(function(value){
 			    resolve(value);
@@ -102,7 +121,12 @@ JSPromise.prototype.then = function(onFulfilled, onRejected){
 		}else if(_this.promiseStatus === STATUS_REJECTED){
 		    if(_this.onRejected){
 			_this.resolved = true;
-			let retVal = _this.onRejected.apply(_this, [_this.rejectReason]);
+			let retVal;
+			try{
+			    retVal = _this.onRejected.apply(_this, [_this.rejectReason]);
+			}catch(e){
+			    reject(e);
+			}
 			if(retVal instanceof JSPromise){
 			    retVal.then(function(value){
 				resolve(value);
